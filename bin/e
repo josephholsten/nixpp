@@ -9,4 +9,4 @@ then
 else
     E=/usr/bin/vi
 fi
-exec $VI "$@"
+exec $E "$@"
