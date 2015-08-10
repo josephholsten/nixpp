@@ -1,0 +1,9 @@
+#!/bin/sh
+# map: perform command accross items
+if command -v parallel
+then
+    MAP=parallel
+else
+    MAP=xargs
+fi
+exec $MAP "$@"

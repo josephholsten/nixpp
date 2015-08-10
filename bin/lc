@@ -1,0 +1,4 @@
+#!/bin/sh
+
+PLANNINE=/opt/plan9
+exec $PLANNINE/bin/lc "$@"

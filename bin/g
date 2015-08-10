@@ -1,0 +1,19 @@
+#!/bin/sh
+# g: improved grep -n selector
+if command -v pt
+then
+    G=pt
+elif command -v ag
+then
+    G=ag
+elif command -v ack-grep
+then
+    G=ack-grep
+elif command -v ack
+then
+    G=ack
+else
+    G="grep -n"
+fi
+exec $G "$@"
+
