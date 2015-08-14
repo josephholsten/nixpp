@@ -1,5 +1,5 @@
 #!/bin/sh
-# pg: pager selector
+# p: pager selector
 if [ -n "${ITERM_SESSION_ID}" ]
 then
     # you've got a fancy terminal emulator
