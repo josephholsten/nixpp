@@ -4,6 +4,6 @@ if command -v parallel
 then
     MAP=parallel
 else
-    MAP=xargs
+    MAP=xargs # posix default
 fi
 exec $MAP "$@"

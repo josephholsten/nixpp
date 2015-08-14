@@ -1,6 +1,11 @@
 #!/bin/sh
 # b - load named files in an editor
 
+if [ -z "$EDITOR" ]
+then
+    EDITOR=e
+fi
+
 if [ "$1" = "" ]; then
   exec $EDITOR .
 else

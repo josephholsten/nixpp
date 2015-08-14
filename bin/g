@@ -1,5 +1,5 @@
 #!/bin/sh
-# g: improved grep -n selector
+# g -  improved grep -n selector
 if command -v pt
 then
     G=pt
@@ -13,7 +13,7 @@ elif command -v ack
 then
     G=ack
 else
-    G="grep -n"
+    G="grep -n" # posix default
 fi
 exec $G "$@"
 

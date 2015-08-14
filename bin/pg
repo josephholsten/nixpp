@@ -1,3 +1,13 @@
 #!/bin/sh
-# you've got a fancy terminal emulator
-exec cat
+# pg: pager selector
+if [ -n "${ITERM_SESSION_ID}" ]
+then
+    # you've got a fancy terminal emulator
+    PAGER=cat
+elif command -v less
+then
+    PAGER=less
+else
+    PAGER=more
+fi
+exec $PAGER "$@"

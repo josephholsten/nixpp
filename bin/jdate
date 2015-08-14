@@ -1,2 +1,3 @@
 #!/bin/sh
+# jdate: date in julian format
 exec date "$@" +%j

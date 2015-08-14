@@ -1,5 +1,5 @@
 #!/bin/sh
-# e: editor selector
+# e - select editor
 if command -v nvim > /dev/null
 then
     E=nvim
@@ -7,6 +7,6 @@ elif command -v vim > /dev/null
 then
     E=vim
 else
-    E=/usr/bin/vi
+    E=vi # posix default
 fi
 exec $E "$@"
