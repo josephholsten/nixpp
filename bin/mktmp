@@ -1,0 +1,9 @@
+#!/bin/sh
+# mktmp - portable mktemp(1)
+# FreeBSD, Darwin:
+#     mktemp -t "${1:-tmp}" # -t: generate template from prefix
+# OpenBSD, GNU, Illumos:
+#     mktemp -t "${1:-tmp}.XXXXXXXXXX" " -t: use TMPDIR
+# HP-UX: (unsupported)
+#     mktemp -cp "${1:-tmp}"
+exec mktemp ${TMPDIR:-/tmp}/${1:-tmp}.XXXXXXXXXX
