@@ -1,13 +1,127 @@
 #!/bin/sh
 # b - load named files in an editor
 
-if [ -z "$EDITOR" ]
-then
-    EDITOR=e
+if [ x != x"$DEBUG" ]; then
+    set -x
 fi
 
-if [ "$1" = "" ]; then
-  exec $EDITOR .
-else
-  exec $EDITOR "$@"
+# nvimfs fuse mount point
+nvimfs="$HOME/.config/nvim/neovimfs"
+
+## Helper functions
+usage() {
+    echo 'usage: b [+lineno] file...' 2>&1
+    exit 1
+}
+
+# test for nvim(1) active session
+nvim_available() {
+    test -f "$(nvim_path)"
+}
+
+nvim_clients() {
+    find "$nvimfs/clients" \
+        -depth 1 \
+        -type d
+}
+
+nvim_path() {
+    client="$(nvim_clients | head -n 1)"
+    echo "$client/cmd"
+}
+
+nvim_open() {
+    file="$1"
+    lineno="$2"
+    escaped=$(echo "$file" | sed 's/ /\\ /')
+    nvim="$(nvim_path)"
+    echo "vsplit" > "$nvim"
+    echo "e $escaped" > "$nvim"
+    if [ -n "$lineno" ]; then
+        echo "$lineno" > "$nvim"
+    fi
+}
+
+# test for plan9 sam(1) active session
+sam_available() {
+    test -p "$(sam_path)"
+}
+
+sam_path() {
+    if [ -z "$DISPLAY" ]; then
+        sam="/tmp/.sam.$USER"
+    else
+        if [ "$DISPLAY" = ":0" ]; then
+            DISPLAY=:0.0
+        fi
+        sam="/tmp/.sam.$USER.$DISPLAY"
+    fi
+    echo "$sam"
+}
+
+sam_open() {
+    file="$1"
+    lineno="$2"
+    sam="$(sam_path)"
+    echo "B $file" >> "$sam"
+    if [ -n "$lineno" ]; then
+        echo "$lineno" >> "$sam"
+    fi
+}
+
+# test for plan9 plumb(1)
+plumb_available() {
+    command -v plumb > /dev/null 2>&1
+}
+
+plumb_open() {
+    plumb -s B -d edit "$1"
+}
+
+# test for NextStep open(1)
+open_available() {
+    command -v open > /dev/null 2>&1
+}
+
+# test for emacsclient(1)
+ec_available() {
+    command -v emacsclient > /dev/null 2>&1
+}
+
+lineno=""
+if [ $# -gt 0 ]; then
+    case "$1" in
+        +[0-9]*)
+            lineno="$(echo "$1" | sed 's/+/:/')"
+            shift
+            ;;
+    esac
 fi
+
+# default file: '.'
+if [ "$#" = 0 ]; then
+    set .
+fi
+
+for i; do
+    i="$i$lineno"
+    fullpath="$(realpath "$i")"
+    # lineno should be empty unless fullpath ~= /:/
+    lineno="$(echo "${fullpath}" | grep ':' | sed 's/^.*://')"
+    file="$(echo "${fullpath}" | sed 's/:.*//')"
+    echo "editing $fullpath" >&2
+    if sam_available; then
+        sam_open "$file" "$lineno"
+    elif nvim_available; then
+        nvim_open "$file" "$lineno"
+    elif plumb_available; then
+        plumb_open "$fullpath"
+    elif open_available; then
+        open "$file"
+    else
+        if [ -n "$EDITOR" ]; then
+            EDITOR=vi # posix default
+        fi
+        exec "$EDITOR" "$fullpath"
+    fi
+done
