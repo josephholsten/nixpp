@@ -1,0 +1,49 @@
+#!/bin/sh
+# ps - print process status
+#
+# ## SYNOPSIS
+#     ps [-Aadfl] [-o fmt] [-G gid[,gid...]] [-g grp[,grp...]]
+#       [-u uid[,uid...]] [-p pid[,pid...]] [-t tty[,tty...]]
+#       [-U user[,user...]]
+#
+# ## DESCRIPTION
+# flags are limited to minimum posix ps(1) options
+#
+# -A
+# -a
+# -d
+# -f
+# -l
+# -o fmt
+# -G gid[,gid...]
+# -g grp[,grp...]
+# -u uid[,uid...]
+# -p pid[,pid...]
+# -t tty[,tty...]
+# -U user[,user...]
+PS=/bin/ps
+
+if [ -n "$DEBUG" ]; then
+    set -x
+fi
+
+args="$(getopt aAdeflxG:o:p:t:U:g:n:u: $*)"
+errcode=$?
+if [ $errcode != 0 ]
+then
+
+usage=$(cat <<EOF
+usage: ps [-Aadfl] [-o fmt] [-G gid[,gid...]] [-g grp[,grp...]]
+ [-u uid[,uid...]] [-p pid[,pid...]] [-t tty[,tty...]]
+ [-U user[,user...]]
+EOF
+)
+
+    echo "$usage" >&2
+    # exit 1
+    # pass straight to existing ps because some folks don't work with posix
+    exec $PS "$@"
+fi
+
+set -- $args
+exec $PS "$@"

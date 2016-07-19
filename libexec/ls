@@ -1,0 +1,17 @@
+#!/bin/sh
+# ls - list files
+# limit to posix ls args
+
+LS=ls
+
+args=`getopt :adRcfrtuglsimnoq $*`
+errcode=$?
+if [ $errcode != 0 ]
+then
+    echo 'usage: ls [-adR] [-cfrtu] [-lgimnoqs] [file...]' >&2
+    exit 1
+fi
+
+set -- -1 $args
+
+exec $LS "$@"
