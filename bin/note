@@ -1,0 +1,45 @@
+#!/bin/sh
+# note - display desktop notification notify somehow
+
+# inspired by:
+# - https://github.com/dylang/grunt-notify
+# - https://github.com/jolicode/JoliNotif
+
+progname=$(basename $0)
+
+if [ "$#" = 1 ]
+then
+    message="$1"
+elif [ "$#" = 2 ]
+then
+    title="$1"
+    message="$2"
+else
+    echo "usage: $progname [title] <message>" >&2
+    exit 1
+fi
+
+if command -v terminal-notifier > /dev/null
+then
+    if [ -z "${title}" ]; then
+        terminal-notifier -message "${message}"
+    else
+        terminal-notifier -title "${title}" -message "${message}"
+    fi
+elif command -v growlnotifier > /dev/null
+then
+    if [ -z "${title}" ]; then
+        growlnotifier "${message}"
+    else
+        growlnotifier -m "${message}" "${title}"
+    fi
+elif command -v notify-send > /dev/null
+then
+    if [ -z "${title}" ]; then
+        notify-send "${message}"
+    else
+        notify-send "${title}" "${message}"
+    fi
+else
+    echo "${title}" "${message}" >&2
+fi

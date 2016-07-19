@@ -1,0 +1,3 @@
+#!/bin/sh
+# scat - cat a file through ssh
+ssh "$1" "cat \"$2\""

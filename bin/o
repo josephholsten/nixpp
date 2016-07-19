@@ -1,0 +1,4 @@
+#!/bin/sh
+
+fullpath="$(realpath "$1")"
+open "$fullpath"

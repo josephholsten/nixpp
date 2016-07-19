@@ -1,9 +1,28 @@
 #!/bin/sh
-# map: perform command accross items
-if command -v parallel
+# map - perform command accross items
+
+# map enforces posix opts, but will use
+# parallel for better performance
+
+if command -v parallel > /dev/null
 then
     MAP=parallel
 else
     MAP=xargs # posix default
 fi
+
+if [ x != x"$DEBUG" ]; then
+    set -x
+fi
+
+args=`getopt ptxE:I:L:n:s: $*`
+
+errcode=$?
+if [ $errcode != 0 ]
+then
+    echo 'usage: map [-ptx] [-E eofstr] [-I replstr] [-L max-lines] [-n max-args] [-s max-chars] [command [arg...]]' >&2
+    exit 1
+fi
+
+set -- $args
 exec $MAP "$@"

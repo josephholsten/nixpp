@@ -1,3 +1,3 @@
 #!/bin/sh
-# l.: list hidden files
+
 exec ls -d .[^.]* "$@"

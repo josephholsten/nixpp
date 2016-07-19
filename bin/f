@@ -1,4 +1,4 @@
 #!/bin/sh
 # f - find all files in the current directory
-du -a "$@" |
-cut -d '	' -f 2
+
+exec find . "$@"

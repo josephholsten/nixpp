@@ -1,3 +1,2 @@
 #!/bin/sh
-# beep - print ascii beep
 printf 

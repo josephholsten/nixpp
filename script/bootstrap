@@ -1,0 +1,35 @@
+#!/bin/sh
+
+pkg_install() {
+    pkg="$1"
+    echo "installing ${pkg}" >&2
+    case "$(uname)" in
+    Darwin)
+        if command -v brew > /dev/null
+        then
+            brew install "${pkg}"
+        else
+            echo "brew(1) not found, get it from http://brew.sh/" >&2
+            return 1
+        fi
+        ;;
+    *)
+        echo "Platform $(uname) not supported, you'll have to install on your own" >&2
+        return 1
+        ;;
+    esac
+}
+
+echo "Checking for pandoc(1)" >&2
+if ! command -v pandoc > /dev/null
+then
+    pkg_install pandoc
+fi
+
+echo "Checking for checkbashisms(1)" >&2
+if ! command -v checkbashisms > /dev/null
+then
+    pkg_install checkbashisms
+fi
+
+echo "nixpp bootstrapped!" >&2

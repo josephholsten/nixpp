@@ -1,19 +1,36 @@
 #!/bin/sh
 # g -  improved grep -n selector
-if command -v pt
+
+if command -v pt > /dev/null
 then
     G=pt
-elif command -v ag
+elif command -v ag > /dev/null
 then
     G=ag
-elif command -v ack-grep
+elif command -v ack-grep > /dev/null
 then
     G=ack-grep
-elif command -v ack
+elif command -v ack > /dev/null
 then
     G=ack
 else
     G="grep -n" # posix default
 fi
+
+
+if [ x != x"$DEBUG" ]; then
+    set -x
+fi
+
+args=`getopt :cisv $*`
+
+errcode=$?
+if [ $errcode != 0 ]
+then
+    echo 'usage: g [-cisv] [file...]' >&2
+    exit 1
+fi
+
+set -- $args
 exec $G "$@"
 

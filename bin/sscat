@@ -1,0 +1,4 @@
+#!/bin/sh
+# sscat - cat a file from a remote machine, using sudo
+
+ssh $1 "sudo cat $2"

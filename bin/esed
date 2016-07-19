@@ -1,0 +1,11 @@
+#!/bin/sh
+# check for BSD sed
+if (echo | sed -E >/dev/null 2>/dev/null); then
+    exec sed -E "$@"
+# check for GNU sed
+elif (echo | sed -r >/dev/null 2>/dev/null); then
+    exec sed -r "$@"
+else
+    echo "could not find BSD or GNU sed(1); it's needed for extended regular expressions" >&2
+    exit 1
+fi

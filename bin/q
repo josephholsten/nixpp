@@ -1,0 +1,7 @@
+#!/bin/sh
+# q - search for things
+
+baseurl="https://duckduckgo.com"
+url="${baseurl}/?q=$*"
+
+exec o "$url"
