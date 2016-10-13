@@ -41,5 +41,9 @@ then
         notify-send "${title}" "${message}"
     fi
 else
-    echo "${title}" "${message}" >&2
+    if [ -z "${title}" ]; then
+        echo "${message}" >&2
+    else
+        echo "${title}" "${message}" >&2
+    fi
 fi
