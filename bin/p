@@ -1,4 +1,16 @@
 #!/bin/sh
 # p - pager
 
-exec less -R $@
+if command -v most > /dev/null
+then
+    exec most $@
+elif command -v lv > /dev/null
+then
+    exec lv -R $@
+elif command -v less > /dev/null
+then
+    exec less -R $@
+else
+    # http://pubs.opengroup.org/onlinepubs/9699919799/utilities/more.html
+    exec more $@
+fi
