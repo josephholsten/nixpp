@@ -1,2 +1,2 @@
 #!/bin/sh
-exec date +%Y-%m-%d
+exec date "$@" +%Y-%m-%d
