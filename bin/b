@@ -103,6 +103,7 @@ fi
 
 for i; do
     i="$i$lineno"
+    # TODO: fallback realpath
     fullpath="$(realpath "$i")"
     # lineno should be empty unless fullpath ~= /:/
     lineno="$(echo "${fullpath}" | grep ':' | sed 's/^.*://')"

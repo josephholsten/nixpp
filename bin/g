@@ -1,9 +1,15 @@
-#!/bin/sh
-# g -  improved grep -n selector
+#/!bin/sh
+# g -  improved grep -r selector
 
-if command -v pt > /dev/null
+if command -v rg > /dev/null
+then
+    G=rg
+elif command -v pt > /dev/null
 then
     G=pt
+elif command -v sift > /dev/null
+then
+    G=sift
 elif command -v ag > /dev/null
 then
     G=ag
@@ -14,23 +20,28 @@ elif command -v ack > /dev/null
 then
     G=ack
 else
-    G="grep -n" # posix default
+    G="grep -R" # gnu/bsd (not posix) default
 fi
-
 
 if [ x != x"$DEBUG" ]; then
     set -x
 fi
 
-args=`getopt :cisv $*`
+args=`getopt :cinsv $*`
 
 errcode=$?
 if [ $errcode != 0 ]
 then
-    echo 'usage: g [-cisv] [file...]' >&2
+    echo 'usage: g [-cinsv] [file...]' >&2
     exit 1
 fi
 
 set -- $args
+
+# default file: '.'
+if [ "$#" = 0 ]; then
+    set .
+fi
+
 exec $G "$@"
 

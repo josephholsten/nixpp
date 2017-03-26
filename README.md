@@ -14,7 +14,7 @@ From `b`:
 -   `acme`
 -   `sam`
 -   [`vim`](http://www.vim.org/)
--   [`vi`](pubs.opengroup.org/onlinepubs/9699919799/utilities/vi.html) (POSIX)
+-   [`vi`](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/vi.html) (POSIX)
 
 From `map`:
 
@@ -30,7 +30,14 @@ From `note`:
 
 From `p`:
 
--   [`most`](http://www.jedsoft.org/most/)
--   [`lv`](https://github.com/ttdoda/lv)
 -   [`less`](http://www.greenwoodsoftware.com/less/)
 -   [`more`](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/more.html) (POSIX)
+
+From `g`:
+
+- [`rg`](https://github.com/BurntSushi/ripgrep)
+- [`pt`](https://github.com/monochromegane/the_platinum_searcher)
+- [`ag`](https://geoff.greer.fm/ag/)
+- [`sift`](https://sift-tool.org/)
+- [`ack`](https://beyondgrep.com/)
+- `grep -R` ([GNU](https://www.gnu.org/software/grep/) & [BSD](https://github.com/howardjp/freegrep)) ([POSIX `grep`](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/grep.html) does not provide `-r`)
