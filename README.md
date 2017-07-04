@@ -34,3 +34,8 @@ From `p`:
 -   [`lv`](https://github.com/ttdoda/lv)
 -   [`less`](http://www.greenwoodsoftware.com/less/)
 -   [`more`](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/more.html) (POSIX)
+
+From `xp`:
+
+-   [`xclip`](https://github.com/astrand/xclip)
+-   [`pbcopy`](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/pbcopy.1.html)

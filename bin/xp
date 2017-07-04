@@ -1,0 +1,35 @@
+#!/bin/sh
+# xp - copy to clipboard, from commandline file, commandline value or STDIN
+# examples
+#   xp ~/.plan
+#   xp "hey there"
+#   echo "they here" | xp
+
+if [ -"$DEBUG"- != -- ]; then
+    set -x
+fi
+
+_copy() {
+    if command -v pbcopy > /dev/null
+    then
+        pbcopy
+    elif command -v xclip > /dev/null
+    then
+        xclip -i -sel c -f | xclip -i -sel p
+    else
+        echo "could not find xclip(1) or pbcopy(1); one is needed for clipboard support" >&2
+        exit 1
+    fi
+}
+
+if [ -"$1"- = -- ]; then
+    _copy
+else
+    if [ -f "$1" ]; then
+        exec <"$1"
+        _copy
+    else
+        echo "$1" | _copy
+    fi
+fi
+
