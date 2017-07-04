@@ -3,7 +3,6 @@ MAN_FILES=\
 	man/man1/b.1 \
 	man/man1/beep.1 \
 	man/man1/e.1 \
-	man/man1/f.1 \
 	man/man1/g.1 \
 	man/man1/jdate.1 \
 	man/man1/l..1 \
