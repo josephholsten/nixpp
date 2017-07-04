@@ -1,16 +1,10 @@
 #!/bin/sh
 # p - pager
 
-if command -v most > /dev/null
+if  command -v less > /dev/null
 then
-    exec most $@
-elif command -v lv > /dev/null
-then
-    exec lv -R $@
-elif command -v less > /dev/null
-then
-    exec less -R $@
+    exec less -R "$@"
 else
     # http://pubs.opengroup.org/onlinepubs/9699919799/utilities/more.html
-    exec more $@
+    exec more "$@"
 fi
