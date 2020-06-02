@@ -1,4 +1,9 @@
 #!/bin/sh
+# o: open file
 
 fullpath="$(realpath "$1")"
-open "$fullpath"
+if [ -"$fullpath"- != -- ]; then
+    open "$fullpath"
+else
+    open "$1"
+fi
