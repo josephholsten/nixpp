@@ -14,7 +14,7 @@ From `b`:
 -   `acme`
 -   `sam`
 -   [`vim`](http://www.vim.org/)
--   [`vi`](pubs.opengroup.org/onlinepubs/9699919799/utilities/vi.html) (POSIX)
+-   [`vi`](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/vi.html) (POSIX)
 
 From `map`:
 
@@ -30,12 +30,18 @@ From `note`:
 
 From `p`:
 
--   [`most`](http://www.jedsoft.org/most/)
--   [`lv`](https://github.com/ttdoda/lv)
 -   [`less`](http://www.greenwoodsoftware.com/less/)
 -   [`more`](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/more.html) (POSIX)
 
-From `xp`:
+From `g`:
 
--   [`xclip`](https://github.com/astrand/xclip)
--   [`pbcopy`](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/pbcopy.1.html)
+-   [`rg`](https://github.com/BurntSushi/ripgrep)
+-   [`pt`](https://github.com/monochromegane/the_platinum_searcher)
+-   [`ag`](https://geoff.greer.fm/ag/)
+-   [`sift`](https://sift-tool.org/)
+-   [`ack`](https://beyondgrep.com/)
+-   `grep -R` ([GNU](https://www.gnu.org/software/grep/) & [BSD](https://github.com/howardjp/freegrep)) ([POSIX `grep`](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/grep.html) does not provide `-r`)
+
+## Related Projects
+
+-   [`unp`](https://packages.debian.org/buster/unp) wraps various archive tools to unpack things easily.
