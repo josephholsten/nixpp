@@ -39,6 +39,6 @@ script is equivalent to idiomatic usage on the following platforms:
 FreeBSD, Darwin:
     mktemp -t "${1:-tmp}" # -t: generate template from prefix
 OpenBSD, GNU, Illumos:
-    mktemp -t "${1:-tmp}.XXXXXXXXXX" " -t: use TMPDIR
+    mktemp -t "\${1:-tmp}.XXXXXXXXXX" " -t: use TMPDIR
 HP-UX: (unsupported)
-    mktemp -cp "${1:-tmp}"
+    mktemp -cp "\${1:-tmp}"

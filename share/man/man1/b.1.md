@@ -13,8 +13,8 @@ b - load named files in an editor
 ## BUGS
 
 
-`B(1)` is intended to open a new buffer in the default editor. This released version does not support this yet, but instead just opens a new editor, which is better than having muscle memory break entirely.
+`b(1)` is intended to open a new buffer in the default editor. This released version does not support this yet, but instead just opens a new editor, which is better than having muscle memory break entirely.
 
 ## HISTORY
 
-`B(1)` was originally a wrapper to open a new file in the default editor on Plan 9. This has a long way to go to get there, but is working on it.
+`b(1)` was originally a wrapper to open a new file in the default editor on Plan 9. This has a long way to go to get there, but is working on it.
